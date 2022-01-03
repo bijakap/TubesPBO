@@ -26,8 +26,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTabbedPane1" alignment="0" min="-2" pref="556" max="-2" attributes="0"/>
-                  <Component id="HaloAdmin1" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
+                  <Component id="jTabbedPane1" min="-2" pref="556" max="-2" attributes="0"/>
+                  <Component id="HaloAdmin1" min="-2" pref="253" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>

@@ -4,13 +4,24 @@
  * and open the template in the editor.
  */
 package sistemperhotelan.View;
+import sistemperhotelan.model.*;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
 
 /**
  *
  * @author bijak
  */
 public class Dashboard extends javax.swing.JFrame {
-    
+     static final String DB_URL = "jdbc:mysql://localhost/tubespbo";
+    static final String DB_USER = "root";
+    static final String DB_PASS = "";
+    static Connection conn;
+    static Statement stmt;
+    static ResultSet rs;
+    List<Kamar> listKamar = new ArrayList<>();
     /**
      * Creates new form UI
      */
@@ -18,6 +29,44 @@ public class Dashboard extends javax.swing.JFrame {
         initComponents();
         String test = "Test User1";
         HaloAdmin1.setText("<html><h3>Halo, "+test+"</h3></html>");
+        this.InitKamar();
+    }
+    
+    public void InitKamar(){
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM kamar";
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                listKamar.add(new Kamar(rs.getString("tipe"), rs.getInt("nomor"),rs.getString("lantai"),rs.getString("status")));
+            }
+
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.setList();
+    }
+    
+    public void setList(){
+        DefaultListModel p1 = new DefaultListModel();
+        DefaultListModel p2 = new DefaultListModel();
+        DefaultListModel p3 = new DefaultListModel();
+        for (int i = 0; i < listKamar.size(); i++) {
+//            System.out.print(listKamar.get(i).getTipe().equals("Standar"));
+            if ( listKamar.get(i).getTipe().equals("Standar") && listKamar.get(i).getStatus().equals("Kosong") ){
+                p1.addElement(listKamar.get(i).getLantai()+"- No"+listKamar.get(i).getNomor());
+            } else if ( listKamar.get(i).getTipe().equals("Superior") && listKamar.get(i).getStatus().equals("Kosong") ){
+                p2.addElement(listKamar.get(i).getLantai()+"- No"+listKamar.get(i).getNomor());
+            } else {
+                p3.addElement(listKamar.get(i).getLantai()+"- No"+listKamar.get(i).getNomor());
+            }
+        }
+        this.ListStandar.setModel(p1);
+        this.ListSuperior.setModel(p2);
+        this.ListDeluxe.setModel(p3);
     }
 
     /**
@@ -166,7 +215,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(HaloAdmin1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(HaloAdmin1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
