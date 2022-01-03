@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package sistemperhotelan;
+import sistemperhotelan.View.*;
 
 /**
  *
@@ -16,6 +17,9 @@ public class MainDriver {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        MasukAdmin frame = new MasukAdmin();
+        frame.setTitle("Hotel Ghoib");
+        frame.setVisible(true);
     }
     
 }
