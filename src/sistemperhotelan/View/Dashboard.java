@@ -22,13 +22,12 @@ public class Dashboard extends javax.swing.JFrame {
     static Statement stmt;
     static ResultSet rs;
     List<Kamar> listKamar = new ArrayList<>();
+    Karyawan worker;
     /**
      * Creates new form UI
      */
     public Dashboard() {
         initComponents();
-        String test = "Test User1";
-        HaloAdmin1.setText("<html><h3>Halo, "+test+"</h3></html>");
         this.InitKamar();
     }
     
@@ -267,7 +266,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel HaloAdmin1;
+    public javax.swing.JLabel HaloAdmin1;
     private javax.swing.JList<String> ListDeluxe;
     private javax.swing.JList<String> ListStandar;
     private javax.swing.JList<String> ListSuperior;

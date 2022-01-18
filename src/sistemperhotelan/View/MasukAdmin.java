@@ -4,13 +4,22 @@
  * and open the template in the editor.
  */
 package sistemperhotelan.View;
-
+import sistemperhotelan.model.*;
+import java.sql.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author bijak
  */
 public class MasukAdmin extends javax.swing.JFrame {
     Dashboard b;
+    Karyawan worker;
+    static final String DB_URL = "jdbc:mysql://localhost/tubespbo";
+    static final String DB_USER = "root";
+    static final String DB_PASS = "";
+    static Connection conn;
+    static Statement stmt;
+    static ResultSet rs;
     /**
      * Creates new form UI
      */
@@ -18,6 +27,29 @@ public class MasukAdmin extends javax.swing.JFrame {
         initComponents();
         b = new Dashboard();
         b.setVisible(false);
+    }
+    
+    public void SaveDataKaryawan(String ID){
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM `karyawan` WHERE `id_karyawan` = '"+ID+"'";
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                if ("Resepsionis".equals(rs.getString("posisi"))){
+                    System.out.println("Resep");
+                    worker = new Resepsionis(rs.getString("id_karyawan"), rs.getString("nama_karyawan"),rs.getString("gender_karyawan"),rs.getString("no_hp"),rs.getString("posisi"));
+                } else{
+                    System.out.println("lainnya");
+                    worker = new Housekeeping(rs.getString("id_karyawan"), rs.getString("nama_karyawan"),rs.getString("gender_karyawan"),rs.getString("no_hp"),rs.getString("posisi"));
+                }
+                
+            }
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -124,8 +156,46 @@ public class MasukAdmin extends javax.swing.JFrame {
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        b.setVisible(true);
+        
+        String email = Login_Admin01.getText();
+        String pass = Login_Admin02.getText();
+        System.out.println(email+" "+pass);
+        String DBemail = "";
+        String DBpass = "";
+        String DBid_karyawan = "";
+        
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM admin WHERE email='" + email + "' && password='" + pass+ "'";
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                DBemail = rs.getString("email");
+                DBpass = rs.getString("password");
+                DBid_karyawan = rs.getString("id_karyawan");
+                System.out.println(rs.getString("email")+" "+ DBid_karyawan +" "+rs.getString("password"));
+//                SELECT * FROM `karyawan` WHERE `id_karyawan` = 101
+            }
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        if (email.equals(DBemail) && pass.equals(DBpass)){
+            System.out.print("Masuk");
+            SaveDataKaryawan(DBid_karyawan);
+            b.worker = worker;
+            b.HaloAdmin1.setText("<html><h3>Halo, "+worker.getNama()+"</h3></html>");
+            this.setVisible(false);
+            b.setVisible(true);
+            
+        } else {
+            System.out.print("Gagal");
+            JOptionPane.showMessageDialog(this, "Gagal Login, Tolong Periksa Email Dan Password","Peringatan", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
     }//GEN-LAST:event_LoginActionPerformed
 
     /**
