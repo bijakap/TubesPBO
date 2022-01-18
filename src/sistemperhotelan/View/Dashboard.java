@@ -15,7 +15,7 @@ import javax.swing.DefaultListModel;
  * @author bijak
  */
 public class Dashboard extends javax.swing.JFrame {
-     static final String DB_URL = "jdbc:mysql://localhost/tubespbo";
+    static final String DB_URL = "jdbc:mysql://localhost/tubespbo";
     static final String DB_USER = "root";
     static final String DB_PASS = "";
     static Connection conn;

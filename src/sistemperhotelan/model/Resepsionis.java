@@ -9,6 +9,21 @@ package sistemperhotelan.model;
  *
  * @author bijak
  */
-public class Resepsionis {
+public class Resepsionis extends Karyawan{
+    private String posisi;
     
+    public Resepsionis(String id, String nama, String gender, String no, String pos){
+        super(id,nama,gender,no);
+        posisi = pos;
+    }
+    
+    @Override
+    public String getPosisi(){
+        return posisi;
+    }
+    
+    @Override
+    public void info(){
+        System.out.print("Resepsionis");
+    }
 }

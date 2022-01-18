@@ -11,5 +11,5 @@ package sistemperhotelan.model;
  */
 public interface Interface_Karyawan {
     public void info();
-    public void getPosisi();
+    public String getPosisi();
 }

@@ -9,6 +9,21 @@ package sistemperhotelan.model;
  *
  * @author bijak
  */
-public class Housekeeping {
+public class Housekeeping extends Karyawan{
+    private String posisi;
     
+    public Housekeeping(String id, String nama, String gender, String no, String pos){
+        super(id,nama,gender,no);
+        posisi = pos;
+    }
+    
+    @Override
+    public String getPosisi(){
+        return posisi;
+    }
+    
+    @Override
+    public void info(){
+        System.out.print("Housekeeping");
+    }
 }
