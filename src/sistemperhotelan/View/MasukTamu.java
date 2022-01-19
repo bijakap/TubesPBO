@@ -18,7 +18,6 @@ public class MasukTamu extends javax.swing.JFrame {
     public MasukTamu() {
         initComponents();
         a = new MasukAdmin();
-        
         a.setVisible(false);
         
     }

@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class MasukAdmin extends javax.swing.JFrame {
     Dashboard b;
+    MasukTamu a;
     Karyawan worker;
     static final String DB_URL = "jdbc:mysql://localhost/tubespbo";
     static final String DB_USER = "root";
@@ -27,6 +28,7 @@ public class MasukAdmin extends javax.swing.JFrame {
         initComponents();
         b = new Dashboard();
         b.setVisible(false);
+
     }
     
     public void SaveDataKaryawan(String ID){
@@ -72,6 +74,11 @@ public class MasukAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         MasukSebagaiTamu.setText("<html> <u>Masuk Sebagai Tamu</u> </html> ");
+        MasukSebagaiTamu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MasukSebagaiTamuMouseClicked(evt);
+            }
+        });
 
         Login_Admin01.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,7 +166,7 @@ public class MasukAdmin extends javax.swing.JFrame {
         
         String email = Login_Admin01.getText();
         String pass = Login_Admin02.getText();
-        System.out.println(email+" "+pass);
+        System.out.println("Input : "+email+" "+pass);
         String DBemail = "";
         String DBpass = "";
         String DBid_karyawan = "";
@@ -174,7 +181,6 @@ public class MasukAdmin extends javax.swing.JFrame {
                 DBpass = rs.getString("password");
                 DBid_karyawan = rs.getString("id_karyawan");
                 System.out.println(rs.getString("email")+" "+ DBid_karyawan +" "+rs.getString("password"));
-//                SELECT * FROM `karyawan` WHERE `id_karyawan` = 101
             }
             stmt.close();
             conn.close();
@@ -182,7 +188,7 @@ public class MasukAdmin extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
-        if (email.equals(DBemail) && pass.equals(DBpass)){
+        if (email.equals(DBemail) && pass.equals(DBpass) && (!email.isEmpty() && !pass.isEmpty())){
             System.out.print("Masuk");
             SaveDataKaryawan(DBid_karyawan);
             b.worker = worker;
@@ -197,6 +203,15 @@ public class MasukAdmin extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_LoginActionPerformed
+
+    private void MasukSebagaiTamuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MasukSebagaiTamuMouseClicked
+        // TODO add your handling code here:
+        System.out.print("Ke Click");
+        this.setVisible(false);
+        a = new MasukTamu();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_MasukSebagaiTamuMouseClicked
 
     /**
      * @param args the command line arguments
