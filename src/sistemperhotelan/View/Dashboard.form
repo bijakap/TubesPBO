@@ -25,11 +25,15 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="HaloAdmin1" min="-2" pref="253" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="HaloAdmin2" max="32767" attributes="0"/>
+                  </Group>
                   <Component id="jTabbedPane1" min="-2" pref="556" max="-2" attributes="0"/>
-                  <Component id="HaloAdmin1" min="-2" pref="253" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="66" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -37,8 +41,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="HaloAdmin1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="HaloAdmin1" min="-2" max="-2" attributes="0"/>
+                  <Component id="HaloAdmin2" alignment="1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jTabbedPane1" min="-2" pref="312" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -286,6 +293,14 @@
     <Component class="javax.swing.JLabel" name="HaloAdmin1">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;h3&gt;Halo, &lt;/h3&gt;&lt;/html&gt;"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="HaloAdmin2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;h3&gt;ID_Karyawan-Posisi &lt;/h3&gt;&lt;/html&gt;"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class MasukAdmin extends javax.swing.JFrame {
     Dashboard b;
     MasukTamu a;
-    Karyawan worker;
+//    Karyawan worker;
     static final String DB_URL = "jdbc:mysql://localhost/tubespbo";
     static final String DB_USER = "root";
     static final String DB_PASS = "";
@@ -26,12 +26,9 @@ public class MasukAdmin extends javax.swing.JFrame {
      */
     public MasukAdmin() {
         initComponents();
-        b = new Dashboard();
-        b.setVisible(false);
-
     }
     
-    public void SaveDataKaryawan(String ID){
+    public void SaveDataKaryawan(Admin DBadmin,String ID){
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
             stmt = conn.createStatement();
@@ -40,10 +37,13 @@ public class MasukAdmin extends javax.swing.JFrame {
             while(rs.next()){
                 if ("Resepsionis".equals(rs.getString("posisi"))){
                     System.out.println("Resep");
-                    worker = new Resepsionis(rs.getString("id_karyawan"), rs.getString("nama_karyawan"),rs.getString("gender_karyawan"),rs.getString("no_hp"),rs.getString("posisi"));
+                    DBadmin.setKaryawan(new Resepsionis(rs.getString("id_karyawan"), rs.getString("nama_karyawan"),rs.getString("gender_karyawan"),rs.getString("no_hp"),rs.getString("posisi")));
+        
+//                    Worker = new Resepsionis(rs.getString("id_karyawan"), rs.getString("nama_karyawan"),rs.getString("gender_karyawan"),rs.getString("no_hp"),rs.getString("posisi"));
                 } else{
                     System.out.println("lainnya");
-                    worker = new Housekeeping(rs.getString("id_karyawan"), rs.getString("nama_karyawan"),rs.getString("gender_karyawan"),rs.getString("no_hp"),rs.getString("posisi"));
+                    DBadmin.setKaryawan(new Housekeeping(rs.getString("id_karyawan"), rs.getString("nama_karyawan"),rs.getString("gender_karyawan"),rs.getString("no_hp"),rs.getString("posisi")));
+//                    worker = new Housekeeping(rs.getString("id_karyawan"), rs.getString("nama_karyawan"),rs.getString("gender_karyawan"),rs.getString("no_hp"),rs.getString("posisi"));
                 }
                 
             }
@@ -167,9 +167,10 @@ public class MasukAdmin extends javax.swing.JFrame {
         String email = Login_Admin01.getText();
         String pass = Login_Admin02.getText();
         System.out.println("Input : "+email+" "+pass);
-        String DBemail = "";
-        String DBpass = "";
+//        String DBemail = "";
+//        String DBpass = "";
         String DBid_karyawan = "";
+        Admin DBadmin = new Admin("","");
         
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
@@ -177,22 +178,28 @@ public class MasukAdmin extends javax.swing.JFrame {
             String sql = "SELECT * FROM admin WHERE email='" + email + "' && password='" + pass+ "'";
             rs = stmt.executeQuery(sql);
             while(rs.next()){
-                DBemail = rs.getString("email");
-                DBpass = rs.getString("password");
+//                DBemail = rs.getString("email");
+//                DBpass = rs.getString("password");
+                System.out.println(rs.getString("email")+" "+ rs.getString("id_karyawan") +" "+rs.getString("password"));
                 DBid_karyawan = rs.getString("id_karyawan");
-                System.out.println(rs.getString("email")+" "+ DBid_karyawan +" "+rs.getString("password"));
+                DBadmin.setEmail(rs.getString("email"));
+                DBadmin.setPassword(rs.getString("password"));
             }
             stmt.close();
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         
-        if (email.equals(DBemail) && pass.equals(DBpass) && (!email.isEmpty() && !pass.isEmpty())){
+        
+        
+        if (email.equals(DBadmin.getEmail()) && pass.equals(DBadmin.getPassword()) && (!DBadmin.getEmail().isEmpty() && !DBadmin.getPassword().isEmpty())){
             System.out.print("Masuk");
-            SaveDataKaryawan(DBid_karyawan);
-            b.worker = worker;
-            b.HaloAdmin1.setText("<html><h3>Halo, "+worker.getNama()+"</h3></html>");
+            SaveDataKaryawan(DBadmin,DBid_karyawan);
+            b = new Dashboard();
+            b.worker = DBadmin.getKaryawan();
+            b.HaloAdmin1.setText("<html><h3>Halo, "+b.worker.getNama()+"</h3></html>");
+            b.HaloAdmin2.setText("<html><h3>ID Karyawan: "+b.worker.getID()+"| Posisi: "+b.worker.getPosisi()+"</h3></html>");
             this.setVisible(false);
             b.setVisible(true);
             

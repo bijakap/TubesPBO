@@ -4,13 +4,21 @@
  * and open the template in the editor.
  */
 package sistemperhotelan.View;
-
+import sistemperhotelan.model.*;
+import java.sql.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author bijak
  */
 public class MasukTamu extends javax.swing.JFrame {
     MasukAdmin a;
+    static final String DB_URL = "jdbc:mysql://localhost/tubespbo";
+    static final String DB_USER = "root";
+    static final String DB_PASS = "";
+    static Connection conn;
+    static Statement stmt;
+    static ResultSet rs;
 //    DashboardAdmin b;
     /**
      * Creates new form UI
@@ -20,6 +28,22 @@ public class MasukTamu extends javax.swing.JFrame {
         a = new MasukAdmin();
         a.setVisible(false);
         
+    }
+    
+    public void SaveTamu(User DBtamu,String ID){
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM `tamu` WHERE `id_tamu` = '"+ID+"'";
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                DBtamu.setTamu(new Tamu(rs.getString("id_tamu"),rs.getString("nama"),rs.getString("no_hp")));
+            }
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -67,6 +91,11 @@ public class MasukTamu extends javax.swing.JFrame {
         MasukTamu.setText("<html> <h1>Masuk Tamu</h1> </html> ");
 
         Login.setText("Masuk");
+        Login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,6 +159,48 @@ public class MasukTamu extends javax.swing.JFrame {
         a.setVisible(true);
         
     }//GEN-LAST:event_MasukAdminMouseClicked
+
+    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
+        // TODO add your handling code here:
+        String id_tamu = Login_Tamu01.getText();
+        String pass = Login_Tamu02.getText();
+        System.out.println("Input : "+id_tamu+" "+pass);
+        String DBid_tamu = "";
+        User DBtamu = new User("");
+        
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM user WHERE id_tamu='" + id_tamu + "' && password='" + pass+ "'";
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                System.out.println(rs.getString("id_tamu")+" "+ rs.getString("password"));
+                DBid_tamu = rs.getString("id_tamu");
+                DBtamu.setPassword(rs.getString("password"));
+            }
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        
+        if (id_tamu.equals(DBid_tamu) && pass.equals(DBtamu.getPassword()) && (!id_tamu.isEmpty() && !DBtamu.getPassword().isEmpty())){
+            System.out.print("Masuk");
+            SaveTamu(DBtamu,DBid_tamu);
+            System.out.print(DBtamu.getTamu().getNama()+" "+DBtamu.getPassword());
+//            b = new Dashboard();
+//            b.worker = DBadmin.getKaryawan();
+//            b.HaloAdmin1.setText("<html><h3>Halo, "+b.worker.getNama()+"</h3></html>");
+//            b.HaloAdmin2.setText("<html><h3>ID Karyawan: "+b.worker.getID()+"| Posisi: "+b.worker.getPosisi()+"</h3></html>");
+//            this.setVisible(false);
+//            b.setVisible(true);
+            
+        } else {
+            System.out.print("Gagal");
+            JOptionPane.showMessageDialog(this, "Gagal Login, Tolong Periksa Email Dan Password","Peringatan", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_LoginActionPerformed
 
     /**
      * @param args the command line arguments
