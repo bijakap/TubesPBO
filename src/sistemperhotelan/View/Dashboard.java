@@ -543,26 +543,32 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void ListStandarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListStandarMouseClicked
         // TODO add your handling code here:
-        this.NoKamar.setText(String.valueOf(listKamarTipe01.get(this.ListStandar.getAnchorSelectionIndex()).getNomor()));
-        this.Lantai.setText(listKamarTipe01.get(this.ListStandar.getAnchorSelectionIndex()).getLantai());
-        this.Tipe.setText(listKamarTipe01.get(this.ListStandar.getAnchorSelectionIndex()).getTipe());
-        this.Status.setText(listKamarTipe01.get(this.ListStandar.getAnchorSelectionIndex()).getStatus());
+        if(listKamarTipe01.size() > 0){
+            this.NoKamar.setText(String.valueOf(listKamarTipe01.get(this.ListStandar.getAnchorSelectionIndex()).getNomor()));
+            this.Lantai.setText(listKamarTipe01.get(this.ListStandar.getAnchorSelectionIndex()).getLantai());
+            this.Tipe.setText(listKamarTipe01.get(this.ListStandar.getAnchorSelectionIndex()).getTipe());
+            this.Status.setText(listKamarTipe01.get(this.ListStandar.getAnchorSelectionIndex()).getStatus());
+        }
     }//GEN-LAST:event_ListStandarMouseClicked
 
     private void ListSuperiorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListSuperiorMouseClicked
         // TODO add your handling code here:
-        this.NoKamar.setText(String.valueOf(listKamarTipe02.get(this.ListSuperior.getAnchorSelectionIndex()).getNomor()));
-        this.Lantai.setText(listKamarTipe02.get(this.ListSuperior.getAnchorSelectionIndex()).getLantai());
-        this.Tipe.setText(listKamarTipe02.get(this.ListSuperior.getAnchorSelectionIndex()).getTipe());
-        this.Status.setText(listKamarTipe02.get(this.ListSuperior.getAnchorSelectionIndex()).getStatus());
+        if(listKamarTipe02.size() > 0){
+            this.NoKamar.setText(String.valueOf(listKamarTipe02.get(this.ListSuperior.getAnchorSelectionIndex()).getNomor()));
+            this.Lantai.setText(listKamarTipe02.get(this.ListSuperior.getAnchorSelectionIndex()).getLantai());
+            this.Tipe.setText(listKamarTipe02.get(this.ListSuperior.getAnchorSelectionIndex()).getTipe());
+            this.Status.setText(listKamarTipe02.get(this.ListSuperior.getAnchorSelectionIndex()).getStatus());
+        }
     }//GEN-LAST:event_ListSuperiorMouseClicked
 
     private void ListDeluxeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListDeluxeMouseClicked
         // TODO add your handling code here:
-        this.NoKamar.setText(String.valueOf(listKamarTipe03.get(this.ListDeluxe.getAnchorSelectionIndex()).getNomor()));
-        this.Lantai.setText(listKamarTipe03.get(this.ListDeluxe.getAnchorSelectionIndex()).getLantai());
-        this.Tipe.setText(listKamarTipe03.get(this.ListDeluxe.getAnchorSelectionIndex()).getTipe());
-        this.Status.setText(listKamarTipe03.get(this.ListDeluxe.getAnchorSelectionIndex()).getStatus());
+        if(listKamarTipe03.size() > 0){
+            this.NoKamar.setText(String.valueOf(listKamarTipe03.get(this.ListDeluxe.getAnchorSelectionIndex()).getNomor()));
+            this.Lantai.setText(listKamarTipe03.get(this.ListDeluxe.getAnchorSelectionIndex()).getLantai());
+            this.Tipe.setText(listKamarTipe03.get(this.ListDeluxe.getAnchorSelectionIndex()).getTipe());
+            this.Status.setText(listKamarTipe03.get(this.ListDeluxe.getAnchorSelectionIndex()).getStatus());
+        }
     }//GEN-LAST:event_ListDeluxeMouseClicked
 
     private void Booking1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Booking1ActionPerformed
@@ -571,26 +577,34 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void ListStandar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListStandar1MouseClicked
         // TODO add your handling code here:
-        this.NoKamar1.setText(String.valueOf(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getNomor()));
-        this.Lantai1.setText(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getLantai());
-        this.Tipe1.setText(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getTipe());
-        this.Status1.setText(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getStatus());
+        if(listKamarTipe11.size() > 0){
+            this.NoKamar1.setText(String.valueOf(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getNomor()));
+            this.Lantai1.setText(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getLantai());
+            this.Tipe1.setText(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getTipe());
+            this.Status1.setText(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getStatus());
+        }
+        
     }//GEN-LAST:event_ListStandar1MouseClicked
 
     private void ListSuperior1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListSuperior1MouseClicked
         // TODO add your handling code here:
-        this.NoKamar.setText(String.valueOf(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getNomor()));
-        this.Lantai.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getLantai());
-        this.Tipe.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getTipe());
-        this.Status.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getStatus());
+        if(listKamarTipe12.size() > 0){
+            this.NoKamar.setText(String.valueOf(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getNomor()));
+            this.Lantai.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getLantai());
+            this.Tipe.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getTipe());
+            this.Status.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getStatus());
+        }
+        
     }//GEN-LAST:event_ListSuperior1MouseClicked
 
     private void ListDeluxe1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListDeluxe1MouseClicked
         // TODO add your handling code here:
-        this.NoKamar.setText(String.valueOf(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getNomor()));
-        this.Lantai.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getLantai());
-        this.Tipe.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getTipe());
-        this.Status.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getStatus());
+        if (listKamarTipe13.size() > 0){
+            this.NoKamar.setText(String.valueOf(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getNomor()));
+            this.Lantai.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getLantai());
+            this.Tipe.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getTipe());
+            this.Status.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getStatus());
+        }
     }//GEN-LAST:event_ListDeluxe1MouseClicked
 
     /**
