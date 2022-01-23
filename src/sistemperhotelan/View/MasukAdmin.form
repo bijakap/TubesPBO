@@ -23,32 +23,28 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-              <Component id="H1admin" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="MasukSebagaiTamu" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="59" max="32767" attributes="0"/>
-                      <Component id="Login" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="Login" min="-2" pref="138" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Password" min="-2" max="-2" attributes="0"/>
-                          <Component id="Email" min="-2" max="-2" attributes="0"/>
+                          <Component id="Password" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="Email" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="Login_Admin01" max="32767" attributes="0"/>
-                          <Component id="Login_Admin02" min="-2" pref="113" max="-2" attributes="0"/>
+                          <Component id="H1admin" min="-2" max="-2" attributes="0"/>
+                          <Component id="Login_Admin02" alignment="0" pref="200" max="32767" attributes="0"/>
+                          <Component id="Login_Admin01" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <EmptySpace min="14" pref="69" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
