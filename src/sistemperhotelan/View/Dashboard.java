@@ -39,6 +39,8 @@ public class Dashboard extends javax.swing.JFrame {
     public Dashboard() {
         initComponents();
         InitKamar();
+        this.Booking.setEnabled(false);
+        this.Booking1.setEnabled(false);
     }
     
     public void InitKamar(){
@@ -548,6 +550,7 @@ public class Dashboard extends javax.swing.JFrame {
             this.Lantai.setText(listKamarTipe01.get(this.ListStandar.getAnchorSelectionIndex()).getLantai());
             this.Tipe.setText(listKamarTipe01.get(this.ListStandar.getAnchorSelectionIndex()).getTipe());
             this.Status.setText(listKamarTipe01.get(this.ListStandar.getAnchorSelectionIndex()).getStatus());
+            this.Booking.setEnabled(true);
         }
     }//GEN-LAST:event_ListStandarMouseClicked
 
@@ -558,6 +561,7 @@ public class Dashboard extends javax.swing.JFrame {
             this.Lantai.setText(listKamarTipe02.get(this.ListSuperior.getAnchorSelectionIndex()).getLantai());
             this.Tipe.setText(listKamarTipe02.get(this.ListSuperior.getAnchorSelectionIndex()).getTipe());
             this.Status.setText(listKamarTipe02.get(this.ListSuperior.getAnchorSelectionIndex()).getStatus());
+            this.Booking.setEnabled(true);
         }
     }//GEN-LAST:event_ListSuperiorMouseClicked
 
@@ -568,11 +572,14 @@ public class Dashboard extends javax.swing.JFrame {
             this.Lantai.setText(listKamarTipe03.get(this.ListDeluxe.getAnchorSelectionIndex()).getLantai());
             this.Tipe.setText(listKamarTipe03.get(this.ListDeluxe.getAnchorSelectionIndex()).getTipe());
             this.Status.setText(listKamarTipe03.get(this.ListDeluxe.getAnchorSelectionIndex()).getStatus());
+            this.Booking.setEnabled(true);
         }
     }//GEN-LAST:event_ListDeluxeMouseClicked
 
     private void Booking1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Booking1ActionPerformed
         // TODO add your handling code here:
+        Dashboard_Book a = new Dashboard_Book();
+        a.setVisible(true);
     }//GEN-LAST:event_Booking1ActionPerformed
 
     private void ListStandar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListStandar1MouseClicked
@@ -582,6 +589,7 @@ public class Dashboard extends javax.swing.JFrame {
             this.Lantai1.setText(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getLantai());
             this.Tipe1.setText(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getTipe());
             this.Status1.setText(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getStatus());
+            this.Booking1.setEnabled(true);
         }
         
     }//GEN-LAST:event_ListStandar1MouseClicked
@@ -593,6 +601,7 @@ public class Dashboard extends javax.swing.JFrame {
             this.Lantai.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getLantai());
             this.Tipe.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getTipe());
             this.Status.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getStatus());
+            this.Booking1.setEnabled(true);
         }
         
     }//GEN-LAST:event_ListSuperior1MouseClicked
@@ -604,6 +613,7 @@ public class Dashboard extends javax.swing.JFrame {
             this.Lantai.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getLantai());
             this.Tipe.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getTipe());
             this.Status.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getStatus());
+            this.Booking1.setEnabled(true);
         }
     }//GEN-LAST:event_ListDeluxe1MouseClicked
 
