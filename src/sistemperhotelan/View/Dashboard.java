@@ -31,8 +31,8 @@ public class Dashboard extends javax.swing.JFrame {
     List<Kamar> listKamarTipe11 = new ArrayList<>();
     List<Kamar> listKamarTipe12 = new ArrayList<>();
     List<Kamar> listKamarTipe13 = new ArrayList<>();
-    
     Karyawan worker;
+    Kamar PilihanKamar;
     /**
      * Creates new form UI
      */
@@ -40,7 +40,6 @@ public class Dashboard extends javax.swing.JFrame {
         initComponents();
         InitKamar();
         this.Booking.setEnabled(false);
-        this.Booking1.setEnabled(false);
     }
     
     public void InitKamar(){
@@ -148,7 +147,6 @@ public class Dashboard extends javax.swing.JFrame {
         Lantai1 = new javax.swing.JLabel();
         Tipe1 = new javax.swing.JLabel();
         Status1 = new javax.swing.JLabel();
-        Booking1 = new javax.swing.JButton();
         HaloAdmin1 = new javax.swing.JLabel();
         HaloAdmin2 = new javax.swing.JLabel();
 
@@ -441,13 +439,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         Status1.setText("Null");
 
-        Booking1.setText("Book Kamar");
-        Booking1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Booking1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout TabBookingLayout = new javax.swing.GroupLayout(TabBooking);
         TabBooking.setLayout(TabBookingLayout);
         TabBookingLayout.setHorizontalGroup(
@@ -457,20 +448,17 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TabBookingLayout.createSequentialGroup()
-                        .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Lantai1)
-                            .addComponent(NoKamar1)
-                            .addComponent(Tipe1)
-                            .addComponent(Status1)))
-                    .addComponent(Booking1))
-                .addContainerGap(86, Short.MAX_VALUE))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Lantai1)
+                    .addComponent(NoKamar1)
+                    .addComponent(Tipe1)
+                    .addComponent(Status1))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         TabBookingLayout.setVerticalGroup(
             TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,8 +485,6 @@ public class Dashboard extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8)))
-                .addGap(18, 18, 18)
-                .addComponent(Booking1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -537,10 +523,15 @@ public class Dashboard extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingActionPerformed
         // TODO add your handling code here:
+        Dashboard_Book a = new Dashboard_Book(PilihanKamar);
+        a.setKeteranganKamar();
+        a.setTitle("Hotel Ghoib");
+        a.setVisible(true);
     }//GEN-LAST:event_BookingActionPerformed
 
     private void ListStandarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListStandarMouseClicked
@@ -551,6 +542,7 @@ public class Dashboard extends javax.swing.JFrame {
             this.Tipe.setText(listKamarTipe01.get(this.ListStandar.getAnchorSelectionIndex()).getTipe());
             this.Status.setText(listKamarTipe01.get(this.ListStandar.getAnchorSelectionIndex()).getStatus());
             this.Booking.setEnabled(true);
+            PilihanKamar = listKamarTipe01.get(this.ListStandar.getAnchorSelectionIndex());
         }
     }//GEN-LAST:event_ListStandarMouseClicked
 
@@ -562,6 +554,7 @@ public class Dashboard extends javax.swing.JFrame {
             this.Tipe.setText(listKamarTipe02.get(this.ListSuperior.getAnchorSelectionIndex()).getTipe());
             this.Status.setText(listKamarTipe02.get(this.ListSuperior.getAnchorSelectionIndex()).getStatus());
             this.Booking.setEnabled(true);
+            PilihanKamar = listKamarTipe02.get(this.ListSuperior.getAnchorSelectionIndex());
         }
     }//GEN-LAST:event_ListSuperiorMouseClicked
 
@@ -573,14 +566,9 @@ public class Dashboard extends javax.swing.JFrame {
             this.Tipe.setText(listKamarTipe03.get(this.ListDeluxe.getAnchorSelectionIndex()).getTipe());
             this.Status.setText(listKamarTipe03.get(this.ListDeluxe.getAnchorSelectionIndex()).getStatus());
             this.Booking.setEnabled(true);
+            PilihanKamar = listKamarTipe03.get(this.ListDeluxe.getAnchorSelectionIndex());
         }
     }//GEN-LAST:event_ListDeluxeMouseClicked
-
-    private void Booking1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Booking1ActionPerformed
-        // TODO add your handling code here:
-        Dashboard_Book a = new Dashboard_Book();
-        a.setVisible(true);
-    }//GEN-LAST:event_Booking1ActionPerformed
 
     private void ListStandar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListStandar1MouseClicked
         // TODO add your handling code here:
@@ -589,7 +577,7 @@ public class Dashboard extends javax.swing.JFrame {
             this.Lantai1.setText(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getLantai());
             this.Tipe1.setText(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getTipe());
             this.Status1.setText(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getStatus());
-            this.Booking1.setEnabled(true);
+            
         }
         
     }//GEN-LAST:event_ListStandar1MouseClicked
@@ -601,7 +589,7 @@ public class Dashboard extends javax.swing.JFrame {
             this.Lantai.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getLantai());
             this.Tipe.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getTipe());
             this.Status.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getStatus());
-            this.Booking1.setEnabled(true);
+            
         }
         
     }//GEN-LAST:event_ListSuperior1MouseClicked
@@ -613,7 +601,7 @@ public class Dashboard extends javax.swing.JFrame {
             this.Lantai.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getLantai());
             this.Tipe.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getTipe());
             this.Status.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getStatus());
-            this.Booking1.setEnabled(true);
+           
         }
     }//GEN-LAST:event_ListDeluxe1MouseClicked
 
@@ -654,7 +642,6 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Booking;
-    private javax.swing.JButton Booking1;
     public javax.swing.JLabel HaloAdmin1;
     public javax.swing.JLabel HaloAdmin2;
     private javax.swing.JLabel Lantai;

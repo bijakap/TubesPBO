@@ -27,7 +27,7 @@ public class MasukTamu extends javax.swing.JFrame {
         initComponents();
         a = new MasukAdmin();
         a.setVisible(false);
-        
+        a.setTitle("Hotel Ghoib");
     }
     
     public void SaveTamu(User DBtamu,String ID){
@@ -141,6 +141,7 @@ public class MasukTamu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Login_Tamu01ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_Tamu01ActionPerformed

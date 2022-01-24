@@ -148,6 +148,7 @@ public class MasukAdmin extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Login_Admin01ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_Admin01ActionPerformed
@@ -194,6 +195,7 @@ public class MasukAdmin extends javax.swing.JFrame {
             System.out.print("Masuk");
             SaveDataKaryawan(DBadmin,DBid_karyawan);
             b = new Dashboard();
+            b.setTitle("Hotel Ghoib");
             b.worker = DBadmin.getKaryawan();
             b.HaloAdmin1.setText("<html><h3>Halo, "+b.worker.getNama()+"</h3></html>");
             b.HaloAdmin2.setText("<html><h3>ID Karyawan: "+b.worker.getID()+"| Posisi: "+b.worker.getPosisi()+"</h3></html>");
@@ -214,6 +216,7 @@ public class MasukAdmin extends javax.swing.JFrame {
         this.setVisible(false);
         a = new MasukTamu();
         a.setVisible(true);
+        a.setTitle("Hotel Ghoib");
         this.dispose();
     }//GEN-LAST:event_MasukSebagaiTamuMouseClicked
 
