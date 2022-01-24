@@ -78,11 +78,11 @@ public class Dashboard_Book extends javax.swing.JFrame {
         return (a * 1000) + (b+1);
     }
     
-    public void createUserDB(int idtamu, String pass){
+    public void createUserDB(int idtamu,int nomor, String pass){
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
             stmt = conn.createStatement();
-            String sql = "INSERT INTO `user` (`id_tamu`, `password`) VALUES ('"+idtamu+"', '"+pass+"')";
+            String sql = "INSERT INTO `user` (`id_tamu`,`nomor`, `password`) VALUES ('"+idtamu+"', '"+nomor+"', '"+pass+"')";
             stmt.execute(sql);
             stmt.close();
             conn.close();
@@ -98,6 +98,20 @@ public class Dashboard_Book extends javax.swing.JFrame {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
             stmt = conn.createStatement();
             String sql = "INSERT INTO `tamu` (`id_tamu`, `nama`, `nomor_hp`) VALUES ('"+idtamu+"', '"+nama+"', '"+no_hp+"')";
+            stmt.execute(sql);
+            stmt.close();
+            conn.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void UpdateStatusKamar(int nokamar){
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            stmt = conn.createStatement();
+            String sql = "UPDATE `kamar` SET `status` = 'Booked' WHERE `kamar`.`nomor` = '"+nokamar+"'";
             stmt.execute(sql);
             stmt.close();
             conn.close();
@@ -237,9 +251,10 @@ public class Dashboard_Book extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Masih Ada Input Yang Kosong","Peringatan", JOptionPane.ERROR_MESSAGE);
         } else {
             int id = GenerateIDTAMU(CekCodeIDTAMU(room),CountIDTAMU(CekCodeIDTAMU(room)));
-            createUserDB(id, this.InputPassUser.getText());
+            createUserDB(id, room.getNomor(),this.InputPassUser.getText());
             CreateTamuDB(id,this.InputNama.getText(),this.InputNoHP.getText());
-            JOptionPane.showMessageDialog(this, "User Tamu Telah Terbuah \n'ID : "+id+"' Password : "+this.InputPassUser.getText()+"'");
+            UpdateStatusKamar(room.getNomor());
+            JOptionPane.showMessageDialog(this, "User Tamu Telah Terbuat \nID : "+id+" \nPassword : "+this.InputPassUser.getText()+"");
             this.setVisible(false);
             this.dispose();
         }

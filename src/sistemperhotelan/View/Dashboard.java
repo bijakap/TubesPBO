@@ -43,6 +43,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
     
     public void InitKamar(){
+        listKamar.clear();
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
             stmt = conn.createStatement();
@@ -149,12 +150,24 @@ public class Dashboard extends javax.swing.JFrame {
         Status1 = new javax.swing.JLabel();
         HaloAdmin1 = new javax.swing.JLabel();
         HaloAdmin2 = new javax.swing.JLabel();
+        Keluar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         TabDaftarKamar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jTabbedPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTabbedPane2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane2MouseClicked(evt);
+            }
+        });
 
         ListStandar.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -494,6 +507,13 @@ public class Dashboard extends javax.swing.JFrame {
 
         HaloAdmin2.setText("<html><h3>ID_Karyawan-Posisi </h3></html>");
 
+        Keluar.setText("Logout");
+        Keluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KeluarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -503,11 +523,13 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 49, Short.MAX_VALUE))
+                        .addGap(0, 105, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(HaloAdmin1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(HaloAdmin2)))
+                        .addComponent(HaloAdmin2)
+                        .addGap(13, 13, 13)
+                        .addComponent(Keluar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -516,7 +538,8 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(HaloAdmin1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(HaloAdmin2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(HaloAdmin2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Keluar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -605,6 +628,25 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ListDeluxe1MouseClicked
 
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        // TODO add your handling code here:
+        this.InitKamar();
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
+        // TODO add your handling code here:
+        this.InitKamar();
+    }//GEN-LAST:event_jTabbedPane2MouseClicked
+
+    private void KeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KeluarActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        this.dispose();
+        MasukAdmin a = new MasukAdmin();
+        a.setVisible(true);
+        a.setTitle("Hotel Ghoib");
+    }//GEN-LAST:event_KeluarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -644,6 +686,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton Booking;
     public javax.swing.JLabel HaloAdmin1;
     public javax.swing.JLabel HaloAdmin2;
+    private javax.swing.JButton Keluar;
     private javax.swing.JLabel Lantai;
     private javax.swing.JLabel Lantai1;
     private javax.swing.JList<String> ListDeluxe;
