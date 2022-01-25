@@ -11,10 +11,12 @@ package sistemperhotelan.model;
  */
 public class User {
     private Tamu tamu;
+    private int nomor_kamar;
     private String password;
     
-    public User(String pass){
+    public User(String pass, int nomor){
         password = pass;
+        nomor_kamar = nomor;
     }
     
     public void setTamu(Tamu guest){
@@ -29,10 +31,17 @@ public class User {
         return password;
     }
     
-     public void setPassword(String pass){
+    public void setPassword(String pass){
         password = pass;
     }
+     
+    public int getNomorKamar(){
+        return nomor_kamar;
+    }
     
+    public void setNomorKamar(int nomor){
+        nomor_kamar = nomor;
+    }
      
     public String[] getDataKaryawan(){
         String data[] = new String[3];

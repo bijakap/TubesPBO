@@ -4,18 +4,97 @@
  * and open the template in the editor.
  */
 package sistemperhotelan.View;
+import sistemperhotelan.model.*;
+import java.sql.*;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author bijak
  */
 public class DashboardTamu extends javax.swing.JFrame {
-
+    Tamu tamu;
+    static final String DB_URL = "jdbc:mysql://localhost/tubespbo";
+    static final String DB_USER = "root";
+    static final String DB_PASS = "";
+    static Connection conn;
+    static Statement stmt;
+    static ResultSet rs;
     /**
      * Creates new form DashboardTamu
      */
     public DashboardTamu() {
         initComponents();
+    }
+    
+    public DashboardTamu(Tamu guest, int NomorKamar){
+        initComponents();
+        tamu = guest;
+        this.IDTAMU.setText(tamu.getID());
+        this.Nama.setText(tamu.getNama());
+        this.NoTelp.setText(tamu.getHP());
+        this.NoKamar.setText(String.valueOf(NomorKamar));
+        GetDataKamarDB(NomorKamar);
+    }
+    
+    public void GetDataKamarDB(int nomorkamar){
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM `kamar` WHERE nomor = "+nomorkamar+"";
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                System.out.println(rs.getString("nomor")+" "+ rs.getString("lantai") +" "+rs.getString("tipe"));
+                this.NoKamar.setText(rs.getString("nomor"));
+                this.Tipe.setText(rs.getString("tipe"));
+                this.Lantai.setText(rs.getString("lantai"));
+            }
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void DeleteUserDB(String IDTAMU){
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            stmt = conn.createStatement();
+            String sql = "DELETE FROM `user` WHERE `id_tamu` = '"+IDTAMU+"'";
+            stmt.execute(sql);
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void DeleteTamuDB(String Nama){
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            stmt = conn.createStatement();
+            //DELETE FROM `tamu` WHERE `tamu`.`nama` = 'asd'
+            String sql = "DELETE FROM `tamu` WHERE `nama` ='"+Nama+"'";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void GantiStatus(String nokamar){
+        //UPDATE `kamar` SET `status` = 'Kosong' WHERE `kamar`.`nomor` = 1;
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            stmt = conn.createStatement();
+            String sql = "UPDATE `kamar` SET `status` = 'Kosong' WHERE `kamar`.`nomor` = "+nokamar+"";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -45,6 +124,7 @@ public class DashboardTamu extends javax.swing.JFrame {
         Lantai = new javax.swing.JLabel();
         NoKamar = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        ButtonKeluar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,10 +161,10 @@ public class DashboardTamu extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(IDTAMU)
-                    .addComponent(Nama)
-                    .addComponent(NoTelp))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(IDTAMU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Nama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(NoTelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,16 +214,16 @@ public class DashboardTamu extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(NoKamar, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(NoKamar, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9))
                         .addGap(34, 34, 34)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Lantai)
-                            .addComponent(Tipe))))
-                .addContainerGap(87, Short.MAX_VALUE))
+                            .addComponent(Tipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Lantai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,6 +245,18 @@ public class DashboardTamu extends javax.swing.JFrame {
         );
 
         jLabel2.setText("<html><u><b>Klik Disini Untuk Melakukan Checkout</b></u></html>");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
+        ButtonKeluar.setText("Logout");
+        ButtonKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonKeluarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,30 +272,61 @@ public class DashboardTamu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 71, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(126, 126, 126)
+                        .addComponent(ButtonKeluar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonKeluar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ButtonKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonKeluarActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        this.dispose();
+        MasukTamu a = new MasukTamu();
+        a.setTitle("Hotel Ghoib");
+        a.setVisible(true);
+    }//GEN-LAST:event_ButtonKeluarActionPerformed
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            System.out.println("Hapus Tamu : "+this.Nama.getText());
+            DeleteTamuDB(this.Nama.getText());
+            System.out.println("Hapus User : "+this.IDTAMU.getText());
+            DeleteUserDB(this.IDTAMU.getText());
+            System.out.println("Ganti Status Kamar: "+this.NoKamar.getText());
+            GantiStatus(this.NoKamar.getText());
+            JOptionPane.showMessageDialog(this, "User Telah Checkout Dan Data User Telah Terhapus");
+            this.setVisible(false);
+            this.dispose();
+            MasukTamu a = new MasukTamu();
+            a.setTitle("Hotel Ghoib");
+            a.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -241,6 +364,7 @@ public class DashboardTamu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton ButtonKeluar;
     private javax.swing.JLabel IDTAMU;
     private javax.swing.JLabel Lantai;
     private javax.swing.JLabel Nama;

@@ -192,7 +192,7 @@ public class MasukAdmin extends javax.swing.JFrame {
         
         
         if (email.equals(DBadmin.getEmail()) && pass.equals(DBadmin.getPassword()) && (!DBadmin.getEmail().isEmpty() && !DBadmin.getPassword().isEmpty())){
-            System.out.print("Masuk");
+            System.out.print("Masuk : ");
             SaveDataKaryawan(DBadmin,DBid_karyawan);
             b = new Dashboard();
             b.setTitle("Hotel Ghoib");

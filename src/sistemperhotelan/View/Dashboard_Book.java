@@ -56,26 +56,31 @@ public class Dashboard_Book extends javax.swing.JFrame {
     }
     
     public int CountIDTAMU(int a){
-        int count = 0;
+        int count = 1;
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM `tamu` WHERE id_tamu LIKE '"+a+"%' ";
+            String sql = "SELECT * FROM `tamu` WHERE id_tamu LIKE '"+a+"%' ORDER BY id_tamu";
             rs = stmt.executeQuery(sql);
             while(rs.next()){
-                count = count + 1;
+                int akhiran = Character.getNumericValue(rs.getString("id_tamu").charAt(3));
+                System.out.println("Akhiran : "+akhiran+" Count :"+count);
+                if (akhiran == count){
+                    count = count + 1;
+                }
             }
             stmt.close();
             conn.close();
-            
+            return count;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return count;
+        
+        return count = 0;
     }
     
     public int GenerateIDTAMU(int a, int b){
-        return (a * 1000) + (b+1);
+        return (a * 1000) + (b);
     }
     
     public void createUserDB(int idtamu,int nomor, String pass){
@@ -246,7 +251,7 @@ public class Dashboard_Book extends javax.swing.JFrame {
 
     private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
         // TODO add your handling code here:
-        System.out.println(this.InputNama.getText()+" "+this.InputNoHP.getText()+" "+this.InputPassUser.getText());
+//        System.out.println(this.InputNama.getText()+" "+this.InputNoHP.getText()+" "+this.InputPassUser.getText());
         if (this.InputNama.getText().isEmpty() || this.InputNoHP.getText().isEmpty() || this.InputPassUser.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Masih Ada Input Yang Kosong","Peringatan", JOptionPane.ERROR_MESSAGE);
         } else {

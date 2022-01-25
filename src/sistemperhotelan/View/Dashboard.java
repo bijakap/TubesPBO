@@ -98,6 +98,41 @@ public class Dashboard extends javax.swing.JFrame {
         this.ListSuperior1.setModel(p5);
         this.ListDeluxe1.setModel(p6);
     }
+    
+    public void setLabelTamu(String NoKamar){
+        String id_tamu = "";
+        String pass = "";
+        String nama = "";
+        String contact = "";
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM `user` WHERE nomor = '"+NoKamar+"';";
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+//                System.out.print(rs.getString("id_tamu")+" "+rs.getString("password"));
+                id_tamu = rs.getString("id_tamu");
+                pass = rs.getString("password");
+            }
+            stmt.close();
+            stmt = conn.createStatement();
+            sql = "SELECT * FROM `tamu` WHERE id_tamu = '"+id_tamu+"';";
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                nama = rs.getString("nama");
+                contact =  rs.getString("nomor_hp");
+//                System.out.print(rs.getString("nama")+" "+rs.getString("nomor_hp"));
+            }
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.IDTamu.setText(id_tamu);
+        this.NamaTamu.setText(nama);
+        this.Kontak.setText(contact);
+        this.Password.setText(pass);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -148,6 +183,14 @@ public class Dashboard extends javax.swing.JFrame {
         Lantai1 = new javax.swing.JLabel();
         Tipe1 = new javax.swing.JLabel();
         Status1 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        NamaTamu = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        IDTamu = new javax.swing.JLabel();
+        Password = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        Jlabelan = new javax.swing.JLabel();
+        Kontak = new javax.swing.JLabel();
         HaloAdmin1 = new javax.swing.JLabel();
         HaloAdmin2 = new javax.swing.JLabel();
         Keluar = new javax.swing.JButton();
@@ -436,9 +479,9 @@ public class Dashboard extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Deluxe", Tipe4);
 
-        jLabel5.setText("No Kamar  :");
+        jLabel5.setText("No Kamar :");
 
-        jLabel6.setText("Lantai       :");
+        jLabel6.setText("Lantai      :");
 
         jLabel7.setText("Tipe         :");
 
@@ -452,6 +495,22 @@ public class Dashboard extends javax.swing.JFrame {
 
         Status1.setText("Null");
 
+        jLabel9.setText("Nama       :");
+
+        NamaTamu.setText("Null");
+
+        jLabel10.setText("ID Tamu   :");
+
+        IDTamu.setText("Null");
+
+        Password.setText("Null");
+
+        jLabel11.setText("Password  :");
+
+        Jlabelan.setText("Contact     :");
+
+        Kontak.setText("Null");
+
         javax.swing.GroupLayout TabBookingLayout = new javax.swing.GroupLayout(TabBooking);
         TabBooking.setLayout(TabBookingLayout);
         TabBookingLayout.setHorizontalGroup(
@@ -459,46 +518,73 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(TabBookingLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Lantai1)
-                    .addComponent(NoKamar1)
-                    .addComponent(Tipe1)
-                    .addComponent(Status1))
-                .addContainerGap(88, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TabBookingLayout.createSequentialGroup()
+                        .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addGap(20, 20, 20)
+                        .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(NoKamar1, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                            .addComponent(Lantai1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Tipe1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Status1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(NamaTamu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(IDTamu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(TabBookingLayout.createSequentialGroup()
+                        .addComponent(Jlabelan)
+                        .addGap(18, 18, 18)
+                        .addComponent(Kontak, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(TabBookingLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(Password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         TabBookingLayout.setVerticalGroup(
             TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TabBookingLayout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TabBookingLayout.createSequentialGroup()
+                        .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(NoKamar1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(Lantai1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Tipe1)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(Status1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(NamaTamu))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(IDTamu))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(Password))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Jlabelan)
+                            .addComponent(Kontak)))
+                    .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
-            .addGroup(TabBookingLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(TabBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TabBookingLayout.createSequentialGroup()
-                        .addComponent(NoKamar1)
-                        .addGap(18, 18, 18)
-                        .addComponent(Lantai1)
-                        .addGap(18, 18, 18)
-                        .addComponent(Tipe1)
-                        .addGap(18, 18, 18)
-                        .addComponent(Status1))
-                    .addGroup(TabBookingLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel8)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Booking Saat Ini", TabBooking);
@@ -518,18 +604,16 @@ public class Dashboard extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 105, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTabbedPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(HaloAdmin1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(HaloAdmin2)
-                        .addGap(13, 13, 13)
-                        .addComponent(Keluar)))
+                        .addComponent(HaloAdmin2)))
+                .addGap(13, 13, 13)
+                .addComponent(Keluar)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -600,19 +684,19 @@ public class Dashboard extends javax.swing.JFrame {
             this.Lantai1.setText(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getLantai());
             this.Tipe1.setText(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getTipe());
             this.Status1.setText(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getStatus());
-            
+            setLabelTamu(String.valueOf(listKamarTipe11.get(this.ListStandar1.getAnchorSelectionIndex()).getNomor()));
         }
         
     }//GEN-LAST:event_ListStandar1MouseClicked
 
     private void ListSuperior1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListSuperior1MouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here: 
         if(listKamarTipe12.size() > 0){
-            this.NoKamar.setText(String.valueOf(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getNomor()));
-            this.Lantai.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getLantai());
-            this.Tipe.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getTipe());
-            this.Status.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getStatus());
-            
+            this.NoKamar1.setText(String.valueOf(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getNomor()));
+            this.Lantai1.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getLantai());
+            this.Tipe1.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getTipe());
+            this.Status1.setText(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getStatus());
+            setLabelTamu(String.valueOf(listKamarTipe12.get(this.ListSuperior1.getAnchorSelectionIndex()).getNomor()));
         }
         
     }//GEN-LAST:event_ListSuperior1MouseClicked
@@ -620,22 +704,26 @@ public class Dashboard extends javax.swing.JFrame {
     private void ListDeluxe1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListDeluxe1MouseClicked
         // TODO add your handling code here:
         if (listKamarTipe13.size() > 0){
-            this.NoKamar.setText(String.valueOf(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getNomor()));
-            this.Lantai.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getLantai());
-            this.Tipe.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getTipe());
-            this.Status.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getStatus());
-           
+            this.NoKamar1.setText(String.valueOf(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getNomor()));
+            this.Lantai1.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getLantai());
+            this.Tipe1.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getTipe());
+            this.Status1.setText(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getStatus());
+            setLabelTamu(String.valueOf(listKamarTipe13.get(this.ListDeluxe1.getAnchorSelectionIndex()).getNomor()));
         }
     }//GEN-LAST:event_ListDeluxe1MouseClicked
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         // TODO add your handling code here:
+        System.out.print("refresh");
         this.InitKamar();
+        System.out.print("... done");
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
         // TODO add your handling code here:
+        System.out.print("refresh");
         this.InitKamar();
+        System.out.print("... done");
     }//GEN-LAST:event_jTabbedPane2MouseClicked
 
     private void KeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KeluarActionPerformed
@@ -686,7 +774,10 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton Booking;
     public javax.swing.JLabel HaloAdmin1;
     public javax.swing.JLabel HaloAdmin2;
+    private javax.swing.JLabel IDTamu;
+    private javax.swing.JLabel Jlabelan;
     private javax.swing.JButton Keluar;
+    private javax.swing.JLabel Kontak;
     private javax.swing.JLabel Lantai;
     private javax.swing.JLabel Lantai1;
     private javax.swing.JList<String> ListDeluxe;
@@ -695,8 +786,10 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JList<String> ListStandar1;
     private javax.swing.JList<String> ListSuperior;
     private javax.swing.JList<String> ListSuperior1;
+    private javax.swing.JLabel NamaTamu;
     private javax.swing.JLabel NoKamar;
     private javax.swing.JLabel NoKamar1;
+    private javax.swing.JLabel Password;
     private javax.swing.JLabel Status;
     private javax.swing.JLabel Status1;
     private javax.swing.JPanel TabBooking;
@@ -710,6 +803,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel Tipe12;
     private javax.swing.JPanel Tipe4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -717,6 +812,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

@@ -37,7 +37,7 @@ public class MasukTamu extends javax.swing.JFrame {
             String sql = "SELECT * FROM `tamu` WHERE `id_tamu` = '"+ID+"'";
             rs = stmt.executeQuery(sql);
             while(rs.next()){
-                DBtamu.setTamu(new Tamu(rs.getString("id_tamu"),rs.getString("nama"),rs.getString("no_hp")));
+                DBtamu.setTamu(new Tamu(rs.getString("id_tamu"),rs.getString("nama"),rs.getString("nomor_hp")));
             }
             stmt.close();
             conn.close();
@@ -165,7 +165,7 @@ public class MasukTamu extends javax.swing.JFrame {
         String pass = Login_Tamu02.getText();
         System.out.println("Input : "+id_tamu+" "+pass);
         String DBid_tamu = "";
-        User DBtamu = new User("");
+        User DBtamu = new User("",0);
         
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
@@ -176,6 +176,7 @@ public class MasukTamu extends javax.swing.JFrame {
                 System.out.println(rs.getString("id_tamu")+" "+ rs.getString("password"));
                 DBid_tamu = rs.getString("id_tamu");
                 DBtamu.setPassword(rs.getString("password"));
+                DBtamu.setNomorKamar(rs.getInt("nomor"));
             }
             stmt.close();
             conn.close();
@@ -185,16 +186,14 @@ public class MasukTamu extends javax.swing.JFrame {
         
         
         if (id_tamu.equals(DBid_tamu) && pass.equals(DBtamu.getPassword()) && (!id_tamu.isEmpty() && !DBtamu.getPassword().isEmpty())){
-            System.out.print("Masuk");
+            System.out.print("Masuk : ");
             SaveTamu(DBtamu,DBid_tamu);
             System.out.print(DBtamu.getTamu().getNama()+" "+DBtamu.getPassword());
-//            b = new Dashboard();
-//            b.worker = DBadmin.getKaryawan();
-//            b.HaloAdmin1.setText("<html><h3>Halo, "+b.worker.getNama()+"</h3></html>");
-//            b.HaloAdmin2.setText("<html><h3>ID Karyawan: "+b.worker.getID()+"| Posisi: "+b.worker.getPosisi()+"</h3></html>");
-//            this.setVisible(false);
-//            b.setVisible(true);
-            
+            DashboardTamu b = new DashboardTamu(DBtamu.getTamu(), DBtamu.getNomorKamar());
+            this.setVisible(false);
+            this.dispose();
+            b.setVisible(true);
+            b.setTitle("Hotel Ghoib");
         } else {
             System.out.print("Gagal");
             JOptionPane.showMessageDialog(this, "Gagal Login, Tolong Periksa Email Dan Password","Peringatan", JOptionPane.ERROR_MESSAGE);
